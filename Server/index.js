@@ -2,8 +2,14 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 const dotenv = require('dotenv').config({ path: './.env' });
+const badges = require('./routes/badges');
+
+// middleware
 
 app.use(express.json());
+
+// routes
+app.use('/api/v1/badges', badges);
 
 mongoose.connect(
   process.env.DB_URL,
@@ -19,7 +25,7 @@ mongoose.connect(
   }
 );
 
-const PORT = 3001;
+const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}...`);
 });
